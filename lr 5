@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Fireplaces {
+private:
+	int quantity;
+	int view;
+	char* name;
+public:
+	Fireplaces(){}
+	Fireplaces(int quantity, int view) : quantity(quantity), view(view) {}
+
+	void input(int qua, int vie, char* nam) {
+		quantity = qua;
+		view = vie;
+		name = new char[strlen(nam) + 1];
+		strcpy(name, nam);
+
+	}
+
+	void print() {
+		cout << "view = " << view << endl << "quantity = " << quantity << endl;
+	}
+
+	void operator = (const Fireplaces& f) {
+		name = new char[strlen(f.name) + 1];
+		strcpy(name, name);
+	}
+
+	void operator + (const Fireplaces& f) {
+		quantity = quantity + f.quantity;
+	}
+
+	void operator * (const Fireplaces& f) {
+		quantity = f.quantity * quantity;
+	}
+
+	void operator - (const Fireplaces& f) {
+		quantity = f.quantity - quantity;
+	}
+
+};
+
+class DuHast:public Fireplaces {
+private:
+	double dudu;
+	float agaga;
+public:
+	DuHast(int quantity, int view, double dudu, float agaga) : Fireplaces(quantity, view), agaga(agaga), dudu(dudu) {}
+	void print2() {
+		cout << "agaga = " << agaga << endl << "dudu = " << dudu << endl;
+	}
+};
+
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	Fireplaces fire;
+	fire.input(10101010, 2020202, (char*)"printer");
+	DuHast duhast(1000, 757000, 8756565.856575, 100.09);
+	DuHast duhast2(4500, 677000, 1116565.111575, 111.09);
+	cout << "DUHAST: __________" << endl;
+	duhast.print();
+	cout << endl << "DUHAST2: __________" << endl;
+	duhast.print2();
+	duhast + duhast2;
+	cout << endl << "DUHAST: __________ \\после сложения" << endl;
+	duhast.print();
+	cout << endl << "FIRE: __________" << endl;
+	fire.print();
+	fire + duhast;
+	cout << endl << "FIRE: __________\\после сложения" << endl;
+	fire.print();
+	cout << endl;
+	system("pause");
+    return 0;
+}
