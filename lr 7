@@ -1,0 +1,127 @@
+#include <iostream>
+using namespace std;
+
+int k;
+float j;
+
+class Fireplaces {
+private:
+	int quantity;
+	int view;
+	char* name;
+public:
+	Fireplaces(){}
+	Fireplaces(int quantity, int view) : quantity(quantity), view(view) {}
+
+	void input(int qua, int vie, char* nam) {
+		quantity = qua;
+		view = vie;
+		name = new char[strlen(nam) + 1];
+		strcpy(name, nam);
+
+	}
+
+	void print() {
+		cout << "view = " << view << endl << "quantity = " << quantity << endl;
+	}
+
+	void operator = (const Fireplaces& f) {
+		name = new char[strlen(f.name) + 1];
+		strcpy(name, name);
+	}
+
+	void operator + (const Fireplaces& f) {
+		quantity = quantity + f.quantity;
+	}
+
+	void operator * (const Fireplaces& f) {
+		quantity = f.quantity * quantity;
+	}
+
+	void operator - (const Fireplaces& f) {
+		quantity = f.quantity - quantity;
+	}
+
+};
+
+class DuHast {
+public:
+	double dudu;
+	float agaga;
+	DuHast(double dudu, float agaga) : agaga(agaga), dudu(dudu) {}
+	void print2() {
+		cout << "agaga = " << agaga << endl << "dudu = " << dudu << endl;
+	}
+	void operator + (const DuHast& dh) {
+		dudu += dh.dudu;
+	}
+};
+
+class Koleso : public Fireplaces, public DuHast {
+private:
+	int camera;
+	float mamont;
+public:
+	Koleso(int camera, float mamont, int quantity, int view, double dudu, float agaga) : Fireplaces(quantity,view), DuHast(dudu,agaga), camera(camera),mamont(mamont){
+		if (dudu > 5000.50) throw k;
+	}
+	void print3() {
+		cout << "camera = " << camera << endl << "mamont = " << mamont << endl;
+	}
+	void summa() {
+		if (agaga > mamont) throw j;
+		mamont += dudu + agaga; 
+		cout << "Сложение элементов dudu и agaga с элементом mamont в классе Koleso = " << mamont << endl;
+	}
+
+};
+
+int main()
+{
+	setlocale(LC_ALL, "russian");
+	try {
+		int n;
+		cout << "Введите n = 1 для ошибки типа J и n = 2 для ошибки  K: " << endl;
+		cin >> n;
+		Fireplaces fire;
+		fire.input(10101010, 2020202, (char*)"printer");
+		DuHast duhast(8756565.856575, 100.09);
+		Koleso koleso(8980, 8767.675, 1000, 1203, 453.78685, 10102.7464);
+		cout << "DUHAST: __________" << endl;
+		duhast.print2();
+		cout << endl << "FIRE: __________" << endl;
+		fire.print();
+		cout << endl << "KOLESO: __________//элементы класса Koleso" << endl;
+		koleso.print3();
+		cout << endl << "KOLESO: __________//элементы класса Fireplaces через конструктор Koleso" << endl;
+		koleso.print();
+		cout << endl << "KOLESO: __________//элементы класса DuHast через конструктор Koleso" << endl;
+		koleso.print2();
+		if (n == 1) {
+			cout << endl << "Koleso: __________//вызов функции сумма класса Koleso" << endl;
+			koleso.summa();
+			cout << endl << "Koleso: __________ \\после сложения" << endl;
+			koleso.print3();
+		}
+		else Koleso koleso2(8980, 8767.675, 1000, 1203, 55453.78685, 10102.7464);
+		cout << endl << "FIRE: __________\\после сложения" << endl;
+		fire + koleso;
+		fire.print();
+		cout << endl << "Duhast: __________\\после сложения" << endl;
+		duhast + koleso;
+		fire.print();
+		cout << endl << "FIRE: __________\\после вычитания" << endl;
+		fire - koleso;
+		fire.print();
+		cout << endl;
+	}
+	catch (int k) {
+		cout << "ERROR: Dudu превышает порог допустимого значения у объекта KOLESO2" << endl;
+	}
+	catch (float j) {
+		cout << "ERROR: Значение agaga больше mamont - что недопустимо для данной функции" << endl;
+	}
+	system("pause");
+	return 0;
+}
+
